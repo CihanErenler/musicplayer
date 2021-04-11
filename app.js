@@ -13,18 +13,41 @@ const play = document.getElementById("play");
 
 const songs = [
   {
-    artist: "Cihan Erenler",
+    artist: "Cartoon",
     src: "1.mp3",
-    name: "I'm travelling",
-    img: "1.png",
+    name: "Why We Lose (feat. Coleman Trapp) [NCS Release]",
+    img: "1.jpg",
   },
   {
-    artist: "Bald Jack",
+    artist: "Diamond Eyes",
     src: "2.mp3",
-    name: "I don't know why I was born",
+    name: "Gravity [NCS Release]",
     img: "2.jpg",
   },
-  { artist: "Emily", src: "3.mp3", name: "I am awesome", img: "3.jpg" },
+  {
+    artist: "Rival x Egzod",
+    src: "3.mp3",
+    name: "Live A Lie (ft. Andreas Stone) [NCS Release]",
+    img: "3.jpg",
+  },
+  {
+    artist: "Cream Blade",
+    src: "4.mp3",
+    name: "Heavenly (feat. Romi) [original mix]",
+    img: "4.jpg",
+  },
+  {
+    artist: "Ship Wrek & Zookeepers",
+    src: "5.mp3",
+    name: "Ark [NCS Release]",
+    img: "5.jpg",
+  },
+  {
+    artist: "Prismo - ",
+    src: "6.mp3",
+    name: "Stronger [NCS Release]",
+    img: "6.jpg",
+  },
 ];
 
 let current = 0;
