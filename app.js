@@ -54,6 +54,7 @@ const songs = [
 
 let current = 0;
 let RANDOM = false;
+let PAUSE = false;
 
 function setSong(x) {
   music.src = `music/${x.src}`;
@@ -165,3 +166,13 @@ random.addEventListener("click", () => {
   random.classList.toggle("selected");
   RANDOM ? (RANDOM = false) : (RANDOM = true);
 });
+document.body.onkeyup = function (e) {
+  if (e.keyCode == 32) {
+    const isPlaying = musicContainer.classList.contains("play");
+    if (isPlaying) {
+      pauseSong();
+    } else {
+      playSong();
+    }
+  }
+};
