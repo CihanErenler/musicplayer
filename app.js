@@ -10,6 +10,8 @@ const currentTimee = document.querySelector(".current-time");
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 const play = document.getElementById("play");
+const random = document.getElementById("random");
+const loop = document.getElementById("loop");
 
 const songs = [
   {
@@ -51,6 +53,7 @@ const songs = [
 ];
 
 let current = 0;
+let RANDOM = false;
 
 function setSong(x) {
   music.src = `music/${x.src}`;
@@ -75,27 +78,25 @@ function pauseSong() {
 }
 
 function nextSong() {
-  current++;
-  if (current > songs.length - 1) {
-    current = 0;
-    setSong(songs[current]);
-    playSong();
-  } else {
-    setSong(songs[current]);
-    playSong();
-  }
+  setSong(songs[checkCurrent(++current)]);
+  playSong();
 }
 
 function prevSong() {
-  current--;
-  if (current < 0) {
+  setSong(songs[checkCurrent(--current)]);
+  playSong();
+}
+
+function checkCurrent(x) {
+  if (x > songs.length - 1) {
+    current = 0;
+    return current;
+  } else if (x < 0) {
     current = songs.length - 1;
-    setSong(songs[current]);
-    playSong();
-  } else {
-    setSong(songs[current]);
-    playSong();
+    return current;
   }
+
+  return x;
 }
 
 function updateProgress(e) {
@@ -141,5 +142,26 @@ play.addEventListener("click", () => {
 next.addEventListener("click", nextSong);
 prev.addEventListener("click", prevSong);
 music.addEventListener("timeupdate", updateProgress);
-music.addEventListener("ended", nextSong);
+music.addEventListener("ended", () => {
+  if (!RANDOM) {
+    nextSong();
+  } else {
+    let random = parseInt(Math.floor(Math.random() * songs.length));
+    setSong(
+      songs[
+        random === current ? checkCurrent((current += 2)) : (current = random)
+      ]
+    );
+    playSong();
+  }
+});
 progressContainer.addEventListener("click", setProgress);
+loop.addEventListener("click", () => {
+  loop.classList.toggle("selected");
+  music.loop ? (music.loop = false) : (music.loop = true);
+});
+
+random.addEventListener("click", () => {
+  random.classList.toggle("selected");
+  RANDOM ? (RANDOM = false) : (RANDOM = true);
+});
